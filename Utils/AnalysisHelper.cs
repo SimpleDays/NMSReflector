@@ -74,7 +74,7 @@ namespace NMSReflector.Utils
                 {
                     FlagName = temp_ColumnAttribute.Name;
                     //添加到映射字典
-                    ReversionMapDict[FlagName] = FlagName;
+                    ReversionMapDict[temp_Property.Name] = FlagName;
 
                     //获取Get方法
                     GetDict[FlagName] = GetDict[temp_Property.Name];
