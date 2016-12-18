@@ -115,11 +115,11 @@ namespace NMSReflector
         /// <typeparam name="T">要操作的类型</typeparam>
         /// <param name="key">标签或者属性字段名</param>
         /// <returns>真实的属性字段名</returns>
-        public static string GetRealPropertyName <T>(string key)
+        public static string GetRealName<T>(string key)
         {
             return GetRealPropertyName(typeof(T), key);
         }
-        public static string GetRealPropertyName(Type type, string key)
+        public static string GetRealName(Type type, string key)
         {
             if (TempCache.ModelPropertyMapCache[type].ContainsKey(key))
             {
