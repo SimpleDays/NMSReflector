@@ -87,28 +87,7 @@ namespace NMSReflector
         {
             return TempCache.GetMethodCache[typeof(T)][propertyName](t);
         }
-        /// <summary>
-        /// 返回真实的属性和字段名，因为属性字段可能会被打上标签，而且外部只识标签名，不知道标签下属性和字段的真实名
-        /// 所以这个方法就提供了对应的映射
-        /// </summary>
-        /// <typeparam name="T">要操作的类型</typeparam>
-        /// <param name="key">标签或者属性字段名</param>
-        /// <returns>真实的属性字段名</returns>
-        public static string GetMapValue<T>(string key)
-        {
-            return GetMapValue(typeof(T), key);
-        }
-        public static string GetMapValue(Type type, string key)
-        {
-            if (TempCache.ModelPropertyMapCache[type].ContainsKey(key))
-            {
-                return TempCache.ModelPropertyMapCache[type][key];
-            }
-            else
-            {
-                return key;
-            }
-        }
+
 
         /// <summary>
         /// 根据属性/字段名获取Type
@@ -130,17 +109,39 @@ namespace NMSReflector
             return null;
         }
         /// <summary>
+        /// 返回真实的属性和字段名，因为属性字段可能会被打上标签，而且外部只识标签名，不知道标签下属性和字段的真实名
+        /// 所以这个方法就提供了对应的映射
+        /// </summary>
+        /// <typeparam name="T">要操作的类型</typeparam>
+        /// <param name="key">标签或者属性字段名</param>
+        /// <returns>真实的属性字段名</returns>
+        public static string GetRealPropertyName <T>(string key)
+        {
+            return GetRealPropertyName(typeof(T), key);
+        }
+        public static string GetRealPropertyName(Type type, string key)
+        {
+            if (TempCache.ModelPropertyMapCache[type].ContainsKey(key))
+            {
+                return TempCache.ModelPropertyMapCache[type][key];
+            }
+            else
+            {
+                return key;
+            }
+        }
+        /// <summary>
         /// 如果这个类或者字段被打上了标签，那么通过这个方法获取到的就是标签的名。
         /// 如果没有打标签，那么返回的就是属性或者字段的名。
         /// </summary>
         /// <typeparam name="T">要操作类的类型</typeparam>
         /// <param name="key">属性或者字段名</param>
         /// <returns></returns>
-        public static string GetRealPropertyName<T>(string key)
+        public static string GetMapName<T>(string key)
         {
-            return GetRealPropertyName(typeof(T), key);
+            return GetMapName(typeof(T), key);
         }
-        public static string GetRealPropertyName(Type type, string key)
+        public static string GetMapName(Type type, string key)
         {
             return TempCache.ModelPropertyReversionMapCache[type][key];
         }
