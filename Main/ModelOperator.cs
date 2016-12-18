@@ -117,7 +117,7 @@ namespace NMSReflector
         /// <returns>真实的属性字段名</returns>
         public static string GetRealName<T>(string key)
         {
-            return GetRealPropertyName(typeof(T), key);
+            return GetRealName(typeof(T), key);
         }
         public static string GetRealName(Type type, string key)
         {
