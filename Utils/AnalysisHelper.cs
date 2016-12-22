@@ -134,9 +134,9 @@ namespace NMSReflector.Utils
 
             TempCache.GetMethodCache[temp_Type] = GetDict;
             TempCache.SetMethodCache[temp_Type] = SetDict;
-            TempCache.ModelPropertyMapCache[temp_Type] = MapDict;
+            TempCache.AttibuteNameCache[temp_Type] = MapDict;
             TempCache.ModelTypeCache[temp_Type] = TypeDict;
-            TempCache.ModelPropertyReversionMapCache[temp_Type] = ReversionMapDict;
+            TempCache.RealNameCache[temp_Type] = ReversionMapDict;
             TempCache.SetMethodInfoCache[temp_Type] = SetMethodInfoDict;
             TempCache.GetMethodInfoCache[temp_Type] = GetMethodInfoDict;
             TempCache.FieldInfoCache[temp_Type] = FieldInfoDict;

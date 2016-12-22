@@ -121,9 +121,9 @@ namespace NMSReflector
         }
         public static string GetRealName(Type type, string key)
         {
-            if (TempCache.ModelPropertyMapCache[type].ContainsKey(key))
+            if (TempCache.AttibuteNameCache[type].ContainsKey(key))
             {
-                return TempCache.ModelPropertyMapCache[type][key];
+                return TempCache.AttibuteNameCache[type][key];
             }
             else
             {
@@ -143,7 +143,7 @@ namespace NMSReflector
         }
         public static string GetMapName(Type type, string key)
         {
-            return TempCache.ModelPropertyReversionMapCache[type][key];
+            return TempCache.RealNameCache[type][key];
         }
 
         /// <summary>
@@ -187,7 +187,7 @@ namespace NMSReflector
         public static Dictionary<string, string> GetMapCache<T>()
         {
             Type type = typeof(T);
-            return TempCache.ModelPropertyMapCache[type];
+            return TempCache.AttibuteNameCache[type];
         }
 
     }

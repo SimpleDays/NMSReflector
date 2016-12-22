@@ -23,8 +23,8 @@ namespace NMSReflector.Cache
     {
         public static Dictionary<Type, Dictionary<string, Action<object, object>>> SetMethodCache;
         public static Dictionary<Type, Dictionary<string, Func<object, object>>> GetMethodCache;
-        public static Dictionary<Type, Dictionary<string, string>> ModelPropertyMapCache;
-        public static Dictionary<Type, Dictionary<string, string>> ModelPropertyReversionMapCache;
+        public static Dictionary<Type, Dictionary<string, string>> AttibuteNameCache;
+        public static Dictionary<Type, Dictionary<string, string>> RealNameCache;
         public static Dictionary<Type, Dictionary<string, Type>> ModelTypeCache;
         public static Dictionary<Type, Dictionary<string, MethodInfo>> GetMethodInfoCache;
         public static Dictionary<Type, Dictionary<string, MethodInfo>> SetMethodInfoCache;
@@ -34,8 +34,8 @@ namespace NMSReflector.Cache
         {
             SetMethodCache = new Dictionary<Type, Dictionary<string, Action<object, object>>>();
             GetMethodCache = new Dictionary<Type, Dictionary<string, Func<object, object>>>();
-            ModelPropertyMapCache = new Dictionary<Type, Dictionary<string, string>>();
-            ModelPropertyReversionMapCache = new Dictionary<Type, Dictionary<string, string>>();
+            AttibuteNameCache = new Dictionary<Type, Dictionary<string, string>>();
+            RealNameCache = new Dictionary<Type, Dictionary<string, string>>();
             ModelTypeCache = new Dictionary<Type, Dictionary<string, Type>>();
             FieldInfoCache = new Dictionary<Type, Dictionary<string, FieldInfo>>();
             GetMethodInfoCache = new Dictionary<Type, Dictionary<string, MethodInfo>>();
@@ -50,11 +50,11 @@ namespace NMSReflector.Cache
             GetMethodCache.Clear();
             GetMethodCache = null;
 
-            ModelPropertyMapCache.Clear();
-            ModelPropertyMapCache = null;
+            AttibuteNameCache.Clear();
+            AttibuteNameCache = null;
 
-            ModelPropertyReversionMapCache.Clear();
-            ModelPropertyReversionMapCache = null;
+            RealNameCache.Clear();
+            RealNameCache = null;
 
             ModelTypeCache.Clear();
             ModelTypeCache = null;
