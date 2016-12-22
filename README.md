@@ -90,7 +90,7 @@
     //获取真实属性名
     ModelOperator.GetRealName<Student>("Note");
     //获取映射名
-    ModelOperator.GetMapName<Student>("Description");
+    ModelOperator.GetAttributeName<Student>("Description");
     //其他更多方法详见ModelOperator.cs 注释已经写好
 ``` 
 ##性能测试:
