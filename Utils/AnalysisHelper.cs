@@ -34,8 +34,8 @@ namespace NMSReflector.Utils
             ColumnAttribute temp_ColumnAttribute = null;
             Dictionary<string, Func<object, object>> GetDict = new Dictionary<string, Func<object, object>>();
             Dictionary<string, Action<object, object>> SetDict = new Dictionary<string, Action<object, object>>();
+            Dictionary<string, string> RealDict = new Dictionary<string, string>();
             Dictionary<string, string> MapDict = new Dictionary<string, string>();
-            Dictionary<string, string> ReversionMapDict = new Dictionary<string, string>();
             Dictionary<string, Type> TypeDict = new Dictionary<string, Type>();
             Dictionary<string, MethodInfo> GetMethodInfoDict = new Dictionary<string, MethodInfo>();
             Dictionary<string, MethodInfo> SetMethodInfoDict = new Dictionary<string, MethodInfo>();
@@ -57,7 +57,7 @@ namespace NMSReflector.Utils
             int i_length = tPropertyList.Length;
             int i = 0;
             PropertyInfo temp_Property = null;
-            while (i<i_length)
+            while (i < i_length)
             {
                 temp_Property = tPropertyList[i];
 
@@ -65,7 +65,7 @@ namespace NMSReflector.Utils
                 GetDict[FlagName] = tempNode.EmitGetMethod(temp_Property);
                 SetDict[FlagName] = tempNode.EmitSetMethod(temp_Property);
                 TypeDict[FlagName] = temp_Property.PropertyType;
-                ReversionMapDict[FlagName] = FlagName;
+                MapDict[FlagName] = FlagName;
                 GetMethodInfoDict[FlagName] = temp_Property.GetGetMethod(true);
                 SetMethodInfoDict[FlagName] = temp_Property.GetSetMethod(true);
                 //添加映射
@@ -74,7 +74,7 @@ namespace NMSReflector.Utils
                 {
                     FlagName = temp_ColumnAttribute.Name;
                     //添加到映射字典
-                    ReversionMapDict[temp_Property.Name] = FlagName;
+                    MapDict[temp_Property.Name] = FlagName;
 
                     //获取Get方法
                     GetDict[FlagName] = GetDict[temp_Property.Name];
@@ -88,7 +88,7 @@ namespace NMSReflector.Utils
                     GetMethodInfoDict[FlagName] = temp_Property.GetGetMethod(true);
                     SetMethodInfoDict[FlagName] = temp_Property.GetSetMethod(true);
                 }
-                MapDict[FlagName] = temp_Property.Name;
+                RealDict[FlagName] = temp_Property.Name;
                 i += 1;
             }
             #endregion
@@ -98,22 +98,22 @@ namespace NMSReflector.Utils
             i = 0;
             i_length = tFieldList.Length;
             FieldInfo item_Field = null;
-            while (i<i_length)
+            while (i < i_length)
             {
                 item_Field = tFieldList[i];
                 FlagName = item_Field.Name;
                 GetDict[FlagName] = tempNode.EmitGetMethod(item_Field);
                 SetDict[FlagName] = tempNode.EmitSetMethod(item_Field);
                 TypeDict[FlagName] = item_Field.FieldType;
-                ReversionMapDict[FlagName] = FlagName;
+                MapDict[FlagName] = FlagName;
                 FieldInfoDict[FlagName] = item_Field;
                 temp_ColumnAttribute = item_Field.GetCustomAttribute<ColumnAttribute>();
                 if (temp_ColumnAttribute != null)
                 {
                     FlagName = temp_ColumnAttribute.Name;
                     //添加到映射字典
-                   
-                    ReversionMapDict[item_Field.Name] = FlagName;
+
+                    MapDict[item_Field.Name] = FlagName;
 
                     //获取Get方法
                     GetDict[temp_ColumnAttribute.Name] = GetDict[item_Field.Name];
@@ -126,8 +126,8 @@ namespace NMSReflector.Utils
 
                     FieldInfoDict[FlagName] = item_Field;
                 }
-                MapDict[FlagName] = item_Field.Name;
-                
+                RealDict[FlagName] = item_Field.Name;
+
                 i += 1;
             }
             #endregion
@@ -136,7 +136,7 @@ namespace NMSReflector.Utils
             TempCache.SetMethodCache[temp_Type] = SetDict;
             TempCache.AttibuteNameCache[temp_Type] = MapDict;
             TempCache.ModelTypeCache[temp_Type] = TypeDict;
-            TempCache.RealNameCache[temp_Type] = ReversionMapDict;
+            TempCache.RealNameCache[temp_Type] = RealDict;
             TempCache.SetMethodInfoCache[temp_Type] = SetMethodInfoDict;
             TempCache.GetMethodInfoCache[temp_Type] = GetMethodInfoDict;
             TempCache.FieldInfoCache[temp_Type] = FieldInfoDict;
