@@ -121,9 +121,9 @@ namespace NMSReflector
         }
         public static string GetRealName(Type type, string key)
         {
-            if (TempCache.AttibuteNameCache[type].ContainsKey(key))
+            if (TempCache.RealNameCache[type].ContainsKey(key))
             {
-                return TempCache.AttibuteNameCache[type][key];
+                return TempCache.RealNameCache[type][key];
             }
             else
             {
@@ -137,13 +137,20 @@ namespace NMSReflector
         /// <typeparam name="T">要操作类的类型</typeparam>
         /// <param name="key">属性或者字段名</param>
         /// <returns></returns>
-        public static string GetMapName<T>(string key)
+        public static string GetAttributeName<T>(string key)
         {
-            return GetMapName(typeof(T), key);
+            return GetAttributeName(typeof(T), key);
         }
-        public static string GetMapName(Type type, string key)
+        public static string GetAttributeName(Type type, string key)
         {
-            return TempCache.RealNameCache[type][key];
+            if (TempCache.AttibuteNameCache[type].ContainsKey(key))
+            {
+                return TempCache.AttibuteNameCache[type][key];
+            }
+            else
+            {
+                return key;
+            }
         }
 
         /// <summary>
