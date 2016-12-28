@@ -118,23 +118,19 @@ namespace NMSReflector.Utils
         /// <returns></returns>
         public Action<object, object> EmitSetMethod(FieldInfo field)
         {
-            //创建动态函数，无返回值，两个参数
             DynamicMethod newMethod = new DynamicMethod(field.Name + "_Setter",
                 null,
                 new Type[] { typeof(object), typeof(object) }
                 );
             ILGenerator il = newMethod.GetILGenerator();
 
-            //非静态属性，加载第一个参数
             if (!field.IsStatic)
             {
                 il.Emit(OpCodes.Ldarg_0);
                 il.Emit(OpCodes.Castclass, EmitType);
             }
-            //加载第二个参数
             il.Emit(OpCodes.Ldarg_1);
 
-            //从object拆箱
             if (field.FieldType.IsValueType)
             {
                 il.Emit(OpCodes.Unbox_Any, field.FieldType);
@@ -162,7 +158,7 @@ namespace NMSReflector.Utils
         /// <returns></returns>
         public Func<object, object> EmitGetMethod(FieldInfo field)
         {
-            //创建动态方法，一个返回参数，一个传入参数
+
             DynamicMethod newMethod = new DynamicMethod(field.Name + "_Getter",
                typeof(object),
                new Type[] { typeof(object) }
@@ -171,7 +167,6 @@ namespace NMSReflector.Utils
             ILGenerator il = newMethod.GetILGenerator();
             if (!field.IsStatic)
             {
-                //非静态属性Get获取器
                 il.Emit(OpCodes.Ldarg_0);
                 il.Emit(OpCodes.Castclass, EmitType);
                 il.Emit(OpCodes.Ldfld, field);
@@ -183,7 +178,6 @@ namespace NMSReflector.Utils
             
             if (field.FieldType.IsValueType)
             {
-                //值类型装箱
                 il.Emit(OpCodes.Box, field.FieldType);
             }
 
