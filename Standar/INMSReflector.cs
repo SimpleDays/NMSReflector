@@ -18,5 +18,4 @@ namespace NMSReflector
     public interface INMSReflector
     {
     }
-    
 }
